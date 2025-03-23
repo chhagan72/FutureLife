@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Git Checkout") {
+            steps {
+                echo "Cloning the code"
+                git url: "https://github.com/chhagan72/futurelife.git", branch: "master"
+            }
+        }
+
+        stage("Build") {
+            steps {
+                echo "Building the Docker image"
+                sh "docker build -t futurelife ."
+            }
+        }
+
+        stage("Push to Docker Hub") {
+            steps {
+                echo "Pushing the Docker image to Docker Hub"
+                withCredentials([usernamePassword(credentialsId: "ckrathode", passwordVariable: "chhagan@72", usernameVariable: "ckrathode")]) {
+                    sh "docker tag futurelife ${env.dockerHubUser}/futurelife:latest"
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                    sh "docker push ${env.dockerHubUser}/futurelife:latest"
+                }
+            }
+        }
+
+        stage("Deploy on docker container") {
+            steps {
+                echo "Deploying the container"
+                sh "docker-compose down && docker-compose up -d"
+            }
+        }
+    }
+}
