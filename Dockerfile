@@ -5,7 +5,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y python3-pip python3-venv
 
 COPY requirements.txt /app/requirements.txt
-COPY ./futurelife /app/futurelife
+COPY ./futurelife /app/
 
 
 RUN python3 -m venv /app/venv && \
