@@ -19,11 +19,16 @@ pipeline {
         stage("Push to Docker Hub") {
             steps {
                 echo "Pushing the Docker image to Docker Hub"
-                withCredentials([usernamePassword(credentialsId: "ckrathode", passwordVariable: "chhagan@72", usernameVariable: "ckrathode")]) {
-                    sh "docker tag futurelife ${env.dockerHubUser}/futurelife:latest"
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    sh "docker push ${env.dockerHubUser}/futurelife:latest"
+                withDockerRegistry(credentialsId: 'docker') {
+                    sh "docker tag futurelife:latest chhagan72/futurelife:latest"
+                    sh "docker push chhagan72/futurelife:latest"
+    // some block
                 }
+                // withCredentials([usernamePassword(credentialsId: "ckrathode", passwordVariable: "chhagan@72", usernameVariable: "ckrathode")]) {
+                //     sh "docker tag futurelife ${env.dockerHubUser}/futurelife:latest"
+                //     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                //     sh "docker push ${env.dockerHubUser}/futurelife:latest"
+                // }
             }
         }
 
