@@ -24,7 +24,7 @@ pipeline {
     //                 sh "docker push chhagan72/futurelife:latest"
     // // some block
     //             }
-                withCredentials([usernamePassword(credentialsId: "dockerHub", passwordVariable: "dockerHubPass", usernameVariable: "dockerHubUser")]) {
+                withCredentials([usernamePassword(credentialsId: "docker", passwordVariable: "dockerHubPass", usernameVariable: "dockerHubUser")]) {
                     sh "docker tag futurelife ${env.dockerHubUser}/futurelife:latest"
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                     sh "docker push ${env.dockerHubUser}/futurelife:latest"
