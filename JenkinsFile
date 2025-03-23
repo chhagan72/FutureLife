@@ -5,7 +5,7 @@ pipeline {
         stage("Git Checkout") {
             steps {
                 echo "Cloning the code"
-                git url: "https://github.com/chhagan72/futurelife.git", branch: "master"
+                git url: "https://github.com/chhagan72/futurelife.git", branch: "main"
             }
         }
 
