@@ -1,6 +1,6 @@
 version: "3.3"
 services:
   web:
-    image: chhagan72/futurelife:latest
+    image: ckrathode/futurelife:latest
     ports:
       - "8000:8000"
