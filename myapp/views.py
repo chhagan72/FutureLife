@@ -7,3 +7,6 @@ def index(request):
 
 def BoolDiscovery(request):
     return render(request, 'book-discovery-call.html')
+
+def BookDiscoveryForm(request):
+    return render(request, 'get-in-touch-form.html')
