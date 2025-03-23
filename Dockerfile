@@ -5,7 +5,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y python3-pip python3-venv
 
 COPY requirements.txt /app/requirements.txt
-COPY ./futurelife /app/
+COPY . /app
 
 
 RUN python3 -m venv /app/venv && \
@@ -14,7 +14,7 @@ RUN python3 -m venv /app/venv && \
 
 ENV PATH="/app/venv/bin:$PATH"
 
-WORKDIR /app/futurelife
+WORKDIR /app
 ENTRYPOINT ["python3"]
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
 
