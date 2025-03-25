@@ -23,7 +23,7 @@ pipeline {
             steps {
                     // Run SonarQube scanner
                 script {
-                    withSonarQubeEnv('SonarQube Server') {
+                    withSonarQubeEnv(credentialsId: 'sonarqube') {
                         sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner"
                     }
                 }
