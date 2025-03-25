@@ -7,49 +7,76 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
 
   <link rel="stylesheet" href="/static/css/styles.css">
+
+  
   
 </head>
 <body>
   <div class="container mt-5">
     <div class="card shadow-lg p-4">
       <h2 class="text-center mb-4">Upload Your Biodata</h2>
-      <form>
+      <form method="post" action="#">
+        {% csrf_token %}
         <!-- Name -->
         <div class="mb-3">
           <label for="name" class="form-label">Full Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Enter your full name" required />
+          <input type="text" class="form-control" name="name" id="name" placeholder="Enter your full name" required />
         </div>
 
         <!-- Email -->
-        <div class="mb-3">
+         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter your email" required />
+          <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required />
         </div>
 
-        <!-- Phone Number -->
         <div class="mb-3">
           <label for="phone" class="form-label">Phone Number</label>
-          <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required />
-        </div>
+          <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter your phone number" required />
+        </div> 
 
-        <!-- Upload File -->
+
         <div class="mb-3">
           <label for="biodata" class="form-label">Upload Biodata (PDF or DOC)</label>
-          <input type="file" class="form-control" id="biodata" accept=".pdf,.doc,.docx" required />
-        </div>
+          <input type="file" class="form-control" name="docs" id="docs" accept=".pdf,.doc,.docx" required />
+        </div> 
 
-        <!-- Gender -->
+
         <div class="mb-3">
           <label class="form-label">Gender</label>
-          <select class="form-select" required>
+          <select class="form-select" name="gender" id="gender" required>
             <option value="">Select Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
-        </div>
+        </div>  
+ 
+        <div class="mb-3">
+          <label class="form-label">What region are you calling from?</label>
+          <select class="form-select" name="region" id="region" required>
+            <option value="">Select...</option>
+            <option value="United States">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="India">India</option>
+            <option value="Russia">Russia</option>
+            <option value="UK / Ireland">UK / Ireland</option>
+            <option value="UK / Ireland">Other</option>
+          </select>
+        </div> 
 
-        <!-- Submit Button -->
+        <div class="mb-3">
+          <label class="form-label">What program are you interested in?</label>
+          <select class="form-select" name="program" id="program" required>
+            <option value="">Select...</option>
+            <option value="Technology Sales(SDR)">Technology Sales(SDR)</option>
+            <option value="Product Management">Product Management</option>
+            <option value="AI-Assisted Full Stack">AI-Assisted Full Stack</option>
+            <option value="QA Engineering (SDET)">QA Engineering (SDET)</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="other">Other</option>
+          </select>
+        </div> 
+
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Submit Biodata</button>
         </div>
@@ -58,6 +85,7 @@
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/formValidation.js"></script>
 </body>
 </html> 
 <!-- Footer  -->

@@ -15,6 +15,20 @@ pipeline {
                 sh "docker build -t futurelife ."
             }
         }
+        stage('SonarQube Analysis') {
+            environment {
+                    // Set environment variables required for SonarQube scanner
+                SONAR_SCANNER_HOME = tool 'SonarQube Scanner'
+            }
+            steps {
+                    // Run SonarQube scanner
+                script {
+                    withSonarQubeEnv('SonarQube Server') {
+                        sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
 
         stage("Push to Docker Hub") {
             steps {

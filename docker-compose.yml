@@ -2,5 +2,23 @@ version: "3.3"
 services:
   web:
     image: ckrathode/futurelife:latest
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/
     ports:
       - "8000:8000"
+    networks:
+      - django-network
+
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - node-network
+volumes:
+  dbdata6:
+networks:
+  django-network:
+    driver: bridge
