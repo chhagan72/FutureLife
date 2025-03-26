@@ -36,7 +36,7 @@ volumes:
 services:
   mongodb:
     image: mongo:6-jammy
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./init-db:/docker-entrypoint-initdb.d
       - ./data-db:/data/db
@@ -49,7 +49,7 @@ services:
 
   mongo-express:
     image: mongo-express
-    restart: always
+    restart: unless-stopped
     ports:
       - 8081:8081
     environment:
@@ -58,7 +58,7 @@ services:
 
   web:
     image: ckrathode/futurelife:latest
-    restart: always
+    restart: unless-stopped
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/django_mongodb_docker
