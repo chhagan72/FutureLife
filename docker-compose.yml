@@ -118,7 +118,7 @@ services:
 
   django:
     image: ckrathode/futurelife:latest
-    command: >
+    command:
       sh -c "
       python manage.py makemigrations &&
       python manage.py migrate &&
