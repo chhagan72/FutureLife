@@ -2,8 +2,7 @@ FROM ubuntu
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y python3-pip python3-venv && \
-    sudo rm -rf /var/lib/jenkins/workspace/futurelife/data-db/.mongodb
+RUN apt-get update && apt-get install -y python3-pip python3-venv
 
 COPY requirements.txt /app/requirements.txt
 COPY . /app
