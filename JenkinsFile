@@ -12,7 +12,6 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building the Docker image"
-                sh" sudo rm -rf /var/lib/jenkins/workspace/futurelife/data-db/.mongodb "
                 sh "docker build -t futurelife ."
             }
         }
