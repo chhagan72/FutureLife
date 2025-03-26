@@ -96,7 +96,8 @@ DATABASES = {
         'NAME': 'CK_DB',
         'ENFORCE_SCHEMA': False,  # Database name
         'CLIENT': {
-            'host':'mongodb://localhost:27017/'
+            'host':'mongodb://root:mongoadmin@mongodb:27017/django_mongodb_docker'
+            # 'host':'mongodb://localhost:27017/'
         }
     }
 }
