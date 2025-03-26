@@ -32,7 +32,7 @@ pipeline {
                             -Dsonar.projectVersion=1.0 \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://15.206.125.113:9000 \
-                            -Dsonar.login=sonarqube
+                            -Dsonar.login=\$SONAR_AUTH_TOKEN
                         """
                     }
                 }
