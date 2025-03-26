@@ -31,7 +31,6 @@ pipeline {
                             -Dsonar.projectName='Future Life' \
                             -Dsonar.projectVersion=1.0 \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://65.2.183.55:9000/ \
                             -Dsonar.exclusions=data-db/** \
                             -Dsonar.login=\$SONAR_AUTH_TOKEN
                             -Dsonar.scanner.connectTimeout=600
@@ -80,3 +79,6 @@ pipeline {
         }
     }
 }
+
+
+// -Dsonar.host.url=http://65.2.183.55:9000/ \/
