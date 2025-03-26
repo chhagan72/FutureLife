@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from djongo import models
 # import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -90,16 +91,30 @@ WSGI_APPLICATION = 'featurelife.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'CK_DB',
+#         'ENFORCE_SCHEMA': False,  # Database name
+#         'CLIENT': {
+#             'host':'mongodb://root:mongoadmin@mongodb:27017/django_mongodb_docker'
+#             # 'host':'mongodb://localhost:27017/'
+#         }
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'CK_DB',
-        'ENFORCE_SCHEMA': False,  # Database name
-        'CLIENT': {
-            'host':'mongodb://root:mongoadmin@mongodb:27017/django_mongodb_docker'
-            # 'host':'mongodb://localhost:27017/'
-        }
-    }
+      'ENGINE': 'djongo',
+      'NAME': 'Ck_Db',
+      'CLIENT': {
+          'host': 'mongodb://mongodb:27017',
+          'username': 'root',
+          'password': 'admin',
+          'authSource': 'admin',
+          'authMechanism': 'SCRAM-SHA-1',
+      }
+  }
 }
 
 # Password validation
