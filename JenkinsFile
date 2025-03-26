@@ -55,14 +55,14 @@ pipeline {
                 }
             }   
         }
-        stage("Cleanup Docker Containers") {
-            steps {
-                echo "Stopping and removing all containers"
-                sh "docker stop $(docker ps -aq) || true"
-                sh "docker rm $(docker ps -aq) || true"
-                sh "docker system prune -f --volumes"
-            }
-        }
+        // stage("Cleanup Docker Containers") {
+        //     steps {
+        //         echo "Stopping and removing all containers"
+        //         sh "docker stop $(docker ps -aq) || true"
+        //         sh "docker rm $(docker ps -aq) || true"
+        //         sh "docker system prune -f --volumes"
+        //     }
+        // }
 
         stage("Deploy on docker container") {
             steps {
