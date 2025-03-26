@@ -33,8 +33,6 @@ pipeline {
                             -Dsonar.sources=. \
                             -Dsonar.exclusions=data-db/** \
                             -Dsonar.login=\$SONAR_AUTH_TOKEN
-                            -Dsonar.scanner.connectTimeout=600
-                            -Dsonar.scanner.readTimeout=600
                         """
                     }
                 }
