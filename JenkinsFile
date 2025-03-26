@@ -66,13 +66,15 @@ pipeline {
 
         stage("Deploy on docker container") {
             steps {
-                echo "Stopping and removing all containers"
-                sh "docker stop $(docker ps -aq) || true"
-                sh "docker rm $(docker ps -aq) || true"
-                sh "docker system prune -f --volumes"
+                echo 'topping and removing all containers'
+                sh ''' 
+                docker stop $(docker ps -aq) || true'
+                docker rm $(docker ps -aq) || true'
+                docker system prune -f --volumes'
 
-                echo "Deploying the container"
-                sh "docker-compose down && docker-compose up -d"
+                echo 'Deploying the container'
+                docker-compose down && docker-compose up -d'
+                '''
             }
         }
     }
