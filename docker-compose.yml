@@ -19,10 +19,10 @@ services:
       - MONGODB_URL=mongodb://mongodb:27017/
     ports:
       - "8000:8000"
-    networks:
-      - django-network
     volumes:
       - .:/django_mongodb_docker
+    networks:
+      - twotier
 
 
 volumes:
