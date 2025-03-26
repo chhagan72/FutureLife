@@ -1,24 +1,92 @@
-version: "3.3"
-services:
-  web:
-    image: ckrathode/futurelife:latest
-    environment:
-      - MONGODB_URL=mongodb://mongodb:27017/
-    ports:
-      - "8000:8000"
-    networks:
-      - django-network
+# version: "3.3"
+# services:
+#     mongodb:
+#     image: mongo:6-jammy
+#     ports:
+#       - '27017:27017'
+#     volumes:
+#       - dbdata6:/data/db
+#     networks:
+#       - node-network
 
+#   web:
+#     image: ckrathode/futurelife:latest
+#     environment:
+#       - MONGODB_URL=mongodb://mongodb:27017/
+#     ports:
+#       - "8000:8000"
+#     networks:
+#       - django-network
+
+
+# volumes:
+#   dbdata6:
+# networks:
+#   django-network:
+#     driver: bridge
+
+
+
+version: '3.3'
+
+volumes:
+  init-db:
+  data-db:
+
+services:
   mongodb:
     image: mongo:6-jammy
-    ports:
-      - '27017:27017'
+    restart: always
     volumes:
-      - dbdata6:/data/db
-    networks:
-      - node-network
-volumes:
-  dbdata6:
-networks:
-  django-network:
-    driver: bridge
+      - ./init-db:/docker-entrypoint-initdb.d
+      - ./data-db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongoadmin
+      MONGO_INITDB_DATABASE: django_mongodb_docker
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongoadmin
+
+  web:
+    image: ckrathode/futurelife:latest
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/django_mongodb_docker
+    ports:
+      - 8000:8000
+    links:
+      - mongodb
+    depends_on:
+      - migration
+
+  migration:
+    build: .
+    image: ckrathode/futurelife:latest
+    command: python manage.py migrate
+    volumes:
+      - .:/django_mongodb_docker
+    links:
+      - mongodb
+    depends_on:
+      - make_migrations
+
+  make_migrations:
+    build: .
+    image: ckrathode/futurelife:latest
+    command: python manage.py makemigrations
+    volumes:
+      - .:/django_mongodb_docker
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
