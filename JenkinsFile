@@ -68,12 +68,11 @@ pipeline {
             steps {
                 echo 'topping and removing all containers'
                 sh ''' 
-                docker stop $(docker ps -aq) || true'
-                docker rm $(docker ps -aq) || true'
-                docker system prune -f --volumes'
+                docker stop $(docker ps -aq) || true
 
                 echo 'Deploying the container'
-                docker-compose down && docker-compose up -d'
+                docker-compose down && docker-compose up -d
+                docker start sonar
                 '''
             }
         }
