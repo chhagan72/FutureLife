@@ -25,6 +25,15 @@ pipeline {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonarqube') {
                         sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner"
+                        sh """
+                            ${env.SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                            -Dsonar.projectKey=futurelife \
+                            -Dsonar.projectName='Future Life' \
+                            -Dsonar.projectVersion=1.0 \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://15.206.125.113:9000 \
+                            -Dsonar.login=your-sonarqube
+                        """
                     }
                 }
             }
