@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 from djongo import models
 # import os
@@ -103,19 +104,45 @@ WSGI_APPLICATION = 'featurelife.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#       'ENGINE': 'djongo',
+#       'NAME': 'Ck_Db',
+#       'CLIENT': {
+#           'host': 'mongodb://mongodb:27017',
+#           'username': 'root',
+#           'password': 'admin',
+#           'authSource': 'admin',
+#           'authMechanism': 'SCRAM-SHA-1',
+#       }
+#   }
+# }
+
 DATABASES = {
     'default': {
-      'ENGINE': 'djongo',
-      'NAME': 'Ck_Db',
-      'CLIENT': {
-          'host': 'mongodb://mongodb:27017',
-          'username': 'root',
-          'password': 'admin',
-          'authSource': 'admin',
-          'authMechanism': 'SCRAM-SHA-1',
-      }
-  }
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('POSTGRES_HOST'),
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'PORT': os.environ.get('POSTGRES_PORT'),
+
+    },
+    "nonrel": {
+        "ENGINE": "djongo",
+        "NAME": os.environ.get('MONGO_DB_NAME'),
+        "CLIENT": {
+            "host": os.environ.get('MONGO_DB_HOST'),
+            "port": int(os.environ.get('MONGO_DB_PORT')),
+            "username": os.environ.get('MONGO_DB_USERNAME'),
+            "password": os.environ.get('MONGO_DB_PASSWORD'),
+        },
+        'TEST': {
+            'MIRROR': 'default',
+        },
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
